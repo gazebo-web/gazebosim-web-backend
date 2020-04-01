@@ -1,0 +1,293 @@
+# Ignition Web Server
+
+Test coverage: [![codecov](https://codecov.io/bb/ignitionrobotics/ign-webserver/branch/default/graph/badge.svg)](https://codecov.io/bb/ignitionrobotics/ign-webserver)
+
+# Development and Code style
+
+See https://github.com/golang/go/wiki/CodeReviewComments
+
+The `main()` and the package `init()` functions are in `application.go`. If you are starting to read this code, probably you
+will want to start from there.
+
+# Install
+
+1. Dependencies
+
+    1. Go version 1.9 or above (NOTE: we are currently using 1.9.4)
+
+        * On Ubuntu Xenial or earlier, download and follow instructions from https://golang.org/dl/
+
+        * On Ubuntu Bionic:
+
+            ```
+            sudo apt-get update
+            sudo apt-get install golang-go
+            ```
+
+    1. Other dependencies
+
+        ```
+        sudo apt-get update
+        sudo apt-get install golang-goprotobuf-dev git
+        ```
+
+1. Make a workspace (if needed), for example
+
+    ```
+    mkdir -p ~/go_ws
+    ```
+
+1. Download server code into new directories in the workspace:
+
+    ```
+    hg clone https://bitbucket.org/ignitionrobotics/ign-webserver ~/go_ws/src/bitbucket.org/ignitionrobotics/ign-webserver
+    ```
+
+1. Set necessary environment variable (needs to be set every time the environment is built)
+
+    ```
+    export GOPATH=~/go_ws
+    ```
+
+1. Install `dep` tool (we are currently using v0.4.1)
+
+    Create a bin directory
+
+    ```
+    mkdir ~/go_ws/bin
+    ```
+
+    Move to the workspace's root
+
+    ```
+    cd ~/go_ws
+    ```
+
+    Install dep tool
+
+    > On Ubuntu Bionic, the dep tool will be installed under ~/go_ws/bin (`GOBIN`), so create that:
+    >     `mkdir -p ~/go_ws/bin`
+
+    ```
+    export DEP_RELEASE_TAG=v0.4.1
+    curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+    ```
+
+1. Install dependencies
+
+    ```
+    cd ~/go_ws/src/bitbucket.org/ignitionrobotics/ign-webserver
+    ```
+
+    Download dependencies into `vendor` folder:
+
+        # Xenial
+        $GOPATH/bin/dep ensure
+        # Bionic
+        ~/go_ws/bin/dep ensure
+
+    Note: this project heavily depends on `ign-go` project. It is recommended to
+    execute the following statement regularly to download the latest version of ign-go.
+
+        # Xenial
+        $GOPATH/bin/dep ensure -update bitbucket.org/ignitionrobotics/ign-go
+        # Bionic
+        ~/go_ws/bin/dep ensure
+
+1. Build the application
+
+    ```
+    cd ~/go_ws/src/bitbucket.org/ignitionrobotics/ign-webserver
+    ```
+
+    ```
+    go install
+    ```
+
+1. NOTE: You should not use `go get` to get dependencies (instead use `dep ensure`). Use `go get` only when you need to modify the source code of any dependency. Alternatively, use `virtualgo` (see "Tips for local development" section below).
+
+
+1. Install mysql:
+
+    NOTE: Install a version greater than v5.6.4. In the servers, we are currently using MySQL v5.7.21
+
+
+    ```
+    sudo apt-get install mysql-server
+    ```
+
+    The installer will ask you to create a root password for mysql.
+
+1. Create the database and a user in mysql. Replace `'newuser'` with your username and `'password'` with your new password:
+
+        # Xenial
+        mysql -u root -p
+        # Bionic requires sudo
+        sudo mysql -u root -p
+
+    ```
+    CREATE DATABASE ignition;
+    ```
+
+    Also create a separate database to use with tests:
+
+    ```
+    CREATE DATABASE ignition_test;
+    ```
+
+    ```
+    CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+    ```
+
+    ```
+    GRANT ALL PRIVILEGES ON ignition.* TO 'newuser'@'localhost';
+    ```
+
+    ```
+    GRANT ALL PRIVILEGES ON ignition_test.* TO 'newuser'@'localhost';
+    ```
+
+    ```
+    FLUSH PRIVILEGES;
+    ```
+
+    ```
+    exit
+    ```
+
+# Test
+
+1. Create a Test JWT token (this is needed for tests to pass OK -- `go test`)
+
+    TL;DR: Just copy and paste the following env vars in your system (`.env`)
+
+        # Test RSA256 Private key WITHOUT the -----BEGIN RSA PRIVATE KEY----- and -----END RSA PRIVATE KEY-----
+        # It is used by token-generator to generate the Test JWT Token
+        export TOKEN_GENERATOR_PRIVATE_RSA256_KEY=MIICWwIBAAKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQABAoGAD+onAtVye4ic7VR7V50DF9bOnwRwNXrARcDhq9LWNRrRGElESYYTQ6EbatXS3MCyjjX2eMhu/aF5YhXBwkppwxg+EOmXeh+MzL7Zh284OuPbkglAaGhV9bb6/5CpuGb1esyPbYW+Ty2PC0GSZfIXkXs76jXAu9TOBvD0ybc2YlkCQQDywg2R/7t3Q2OE2+yo382CLJdrlSLVROWKwb4tb2PjhY4XAwV8d1vy0RenxTB+K5Mu57uVSTHtrMK0GAtFr833AkEA6avx20OHo61Yela/4k5kQDtjEf1N0LfI+BcWZtxsS3jDM3i1Hp0KSu5rsCPb8acJo5RO26gGVrfAsDcIXKC+bQJAZZ2XIpsitLyPpuiMOvBbzPavd4gY6Z8KWrfYzJoI/Q9FuBo6rKwl4BFoToD7WIUS+hpkagwWiz+6zLoX1dbOZwJACmH5fSSjAkLRi54PKJ8TFUeOP15h9sQzydI8zJU+upvDEKZsZc/UhT/SySDOxQ4G/523Y0sz/OZtSWcol/UMgQJALesy++GdvoIDLfJX5GBQpuFgFenRiRDabxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw==
+
+        # JWT Token generated by the token-generator program using the above Test RSA keys
+        # This token does not expire.
+        export IGN_TEST_JWT=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0LXVzZXItaWRlbnRpdHkifQ.iV59-kBkZ86XKKsph8fxEeyxDiswY1zvPGi4977cHbbDEkMA3Y3t_zzmwU4JEmjbTeToQZ_qFNJGGNufK2guLy0SAicwjDmv-3dHDfJUH5x1vfi1fZFnmX_b8215BNbCBZU0T2a9DEFypxAQCQyiAQDE9gS8anFLHHlbcWdJdGw
+
+        # A Test RSA256 Public key, without the -----BEGIN CERTIFICATE----- and -----END CERTIFICATE-----.
+        # It is used to override the AUTH0_RSA256_PUBLIC_KEY when tests are run.
+        export TEST_RSA256_PUBLIC_KEY=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQAB
+
+    In summary, in order to make `go test` work with JWT you will need to set the following env vars:
+
+    * `TOKEN_GENERATOR_PRIVATE_RSA256_KEY`
+    * `TEST_RSA256_PUBLIC_KEY`
+    * `IGN_TEST_JWT`
+
+1. Run the test suite
+
+    First, make sure you have all the required env variables set. Below you can
+    see a list of required env vars. But there could be other required vars too.
+    To be completely sure, see the `Env Variables` section.
+
+    ```
+    export IGN_DB_USERNAME=<DB username>
+    ```
+
+    ```
+    export IGN_DB_PASSWORD=<DB password>
+    ```
+
+    ```
+    export IGN_DB_ADDRESS=<DB IP and port. Eg: localhost:3306>
+    ```
+
+    ```
+    export IGN_DB_NAME=ignition
+    ```
+
+    ```
+    export IGN_DB_MAX_OPEN_CONNS=66
+    ```
+
+    ```
+    export IGN_TEST_JWT=<JWT token>
+    ```
+
+    ```
+    export TEST_RSA256_PUBLIC_KEY=< RSA256 public key without the '-----BEGIN CERTIFICATE-----' and '-----END CERTIFICATE-----'>
+    Note: TEST_RSA256_PUBLIC_KEY must be able to decode and validate the IGN_TEST_JWT test token.
+    ```
+
+
+    ```
+    export IGN_DB_LOG=false
+    ```
+
+    ```
+    export IGN_LOGGER_LOG_STDOUT=true
+    ```
+
+    Then, run all tests:
+
+    ```
+    go test bitbucket.org/ignitionrobotics/ign-webserver
+    ```
+
+1. Run the backend server
+
+    First, make sure to set the `AUTH0_RSA256_PUBLIC_KEY` environment variable with the Auth0 RSA256 public key. This env var will be used by the backend to decode and validate any received Auth0 JWT tokens.
+    Note: You can get this key from: <https://osrf.auth0.com/.well-known/jwks.json> (or from your own auth0 user). Open that url in the browser and copy the value of the `x5c` field.
+
+    ```
+    $GOPATH/bin/ign-webserver
+    ```
+
+# Environment Variables
+
+You may want to create an `.env` file to define environment vars. Remember to add it to `.hgignore`. This `.env` will be automatically loaded by the server.
+
+
+# Linter
+
+1. Get the linter
+
+    ```
+    cd ~/go_ws
+    ```
+
+    ```
+    curl -L https://git.io/vp6lP | sh
+    ```
+
+1. Run the linter
+
+    ```
+    ./bin/gometalinter $(go list bitbucket.org/ignitionrobotics/ign-webserver/...)
+    ```
+
+Note you can create this bash script:
+
+```
+#!/bin/bash
+curl -L https://git.io/vp6lP | sh -s -- -b $GOPATH/bin
+$GOPATH/bin/gometalinter $(go list bitbucket.org/ignitionrobotics/ign-webserver/...)
+```
+
+# Development
+
+## Debugging inside docker container
+
+If you ever need to debug the application as if it were running in AWS or the pipelines, you need to do it from inside its docker containter.
+To do that:
+
+Most ideas taken from here:
+Mysql and Docker https://docs.docker.com/samples/library/mysql/#-via-docker-stack-deploy-or-docker-compose
+
+1. First create the docker image for the ign-webserver server. `docker build ign-webserver` . Write down its image ID.
+
+1. Then run a dockerized mysql database. `docker run --name my-mysql -e MYSQL_ROOT_PASSWORD=<desired-root-pwd> -d mysql:5.7.21`
+This will create a mysql docker container with an empty mysql in it.
+
+1. Then you need to connect to that mysql container and run some commands: `docker exec -it my-mysql bash`. From inside the container, connect to mysql using the client (eg. `mysql -u root -p`) and create databases ignition and ignition_test. eg: `create database ignition_test;`.
+
+1. Run the ign-webserver docker container and link it to the database. `docker run --name ign-webserver --rm --link my-mysql:mysql -ti <ign-webserver-image-id> /bin/bash`. This will open a new terminal inside the server container.
+
+1. Then from inside the server container you will need to set the Env Var that points to the linked docker mysql. eg. `export IGN_DB_ADDRESS="172.17.0.2:3306"`
+
+After that you can run the server (from inside the container) invoking the `ign-webserver` command, or run tests by doing `go test`.
