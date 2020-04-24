@@ -1,0 +1,53 @@
+image: registry.gitlab.com/ignitionrobotics/web/images/web-server-pipelines
+
+variables:
+  PKG_NAME: gitlab.com/ignitionrobotics/web/web-server
+  MYSQL_DATABASE: "ignition_test"
+  MYSQL_ROOT_PASSWORD: "root"
+
+##########################################################
+# Stages
+
+stages:
+  - formatting
+  - linting
+  - testing
+  - building
+#  - packaging
+#  - deploying
+
+##########################################################
+# Formatting stage
+
+format:
+  stage: formatting
+  script:
+    - go fmt $(go list ./...)
+
+##########################################################
+# Linting stage
+
+lint:
+  stage: linting
+  script:
+    - /root/go/bin/golangci-lint run
+
+##########################################################
+# Testing stage
+
+test:
+  stage: testing
+  script:
+    - go test $(go list ./...)
+  services:
+    - mysql:5.7
+  environment:
+    name: testing
+
+##########################################################
+# Building stage
+
+build:
+  stage: building
+  script:
+    - go build
