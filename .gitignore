@@ -1,0 +1,17 @@
+# CMake folders
+build
+build_*
+web-server
+.env
+
+# OS generated files
+.DS_Store
+*.swp
+*.swo
+*.bak
+
+# Qt generated files
+*.qmlc
+
+.ycm_extra_conf.py
+*.orig

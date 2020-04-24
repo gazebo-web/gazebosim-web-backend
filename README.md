@@ -11,101 +11,22 @@ will want to start from there.
 
 # Install
 
-1. Dependencies
 
-    1. Go version 1.9 or above (NOTE: we are currently using 1.9.4)
+1. [Go version 1.14](https://golang.org/dl/) or above.
 
-        * On Ubuntu Xenial or earlier, download and follow instructions from https://golang.org/dl/
 
-        * On Ubuntu Bionic:
-
-            ```
-            sudo apt-get update
-            sudo apt-get install golang-go
-            ```
-
-    1. Other dependencies
-
-        ```
-        sudo apt-get update
-        sudo apt-get install golang-goprotobuf-dev git
-        ```
-
-1. Make a workspace (if needed), for example
+1. Download the server code
 
     ```
-    mkdir -p ~/go_ws
+    git clone https://gitlab.com/ignitionrobotics/web/web-server
     ```
 
-1. Download server code into new directories in the workspace:
+1. Build and download dependencies
 
     ```
-    git clone https://gitlab.com/ignitionrobotics/web/web-server ~/go_ws/src/gitlab.com/ignitionrobotics/web/web-server
+    cd web-server
+    go build
     ```
-
-1. Set necessary environment variable (needs to be set every time the environment is built)
-
-    ```
-    export GOPATH=~/go_ws
-    ```
-
-1. Install `dep` tool (we are currently using v0.4.1)
-
-    Create a bin directory
-
-    ```
-    mkdir ~/go_ws/bin
-    ```
-
-    Move to the workspace's root
-
-    ```
-    cd ~/go_ws
-    ```
-
-    Install dep tool
-
-    > On Ubuntu Bionic, the dep tool will be installed under ~/go_ws/bin (`GOBIN`), so create that:
-    >     `mkdir -p ~/go_ws/bin`
-
-    ```
-    export DEP_RELEASE_TAG=v0.4.1
-    curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-    ```
-
-1. Install dependencies
-
-    ```
-    cd ~/go_ws/src/gitlab.com/ignitionrobotics/web/web-server
-    ```
-
-    Download dependencies into `vendor` folder:
-
-        # Xenial
-        $GOPATH/bin/dep ensure
-        # Bionic
-        ~/go_ws/bin/dep ensure
-
-    Note: this project heavily depends on `ign-go` project. It is recommended to
-    execute the following statement regularly to download the latest version of ign-go.
-
-        # Xenial
-        $GOPATH/bin/dep ensure -update gitlab.com/ignitionrobotics/web/ign-go
-        # Bionic
-        ~/go_ws/bin/dep ensure
-
-1. Build the application
-
-    ```
-    cd ~/go_ws/src/gitlab.com/ignitionrobotics/web/web-server
-    ```
-
-    ```
-    go install
-    ```
-
-1. NOTE: You should not use `go get` to get dependencies (instead use `dep ensure`). Use `go get` only when you need to modify the source code of any dependency. Alternatively, use `virtualgo` (see "Tips for local development" section below).
-
 
 1. Install mysql:
 
@@ -155,6 +76,44 @@ will want to start from there.
     exit
     ```
 
+1. Create a `.env` file in the root of the `web-server` directory with the following  environment variables.
+
+```
+export IGN_DB_USERNAME=<YOUR_MYSQL_USERNAME>
+export IGN_DB_PASSWORD=<YOUR_MYSQL_PASSWORD>
+export IGN_DB_ADDRESS=localhost:3306
+export IGN_DB_NAME=ignition
+export IGN_DB_MAX_OPEN_CONNECTIONS=44
+
+# This is needed when updating library versions
+export IGN_VERSION_PASSWORD=<THE_IGNITION_VERSION_PASSWORD>
+
+# These are needed only for deployment
+export AWS_ACCESS_KEY_ID=<YOUR_AWS_ACCESS_KEY>
+export AWS_SECRET_ACCESS_KEY=<YOUR_AWS_SECRET_KEY>
+export AWS_INSTANCE_NAME_PREFIX=<AWS_INSTANCE_PREFIX>
+export AWS_REGION=us-east-1
+
+# This is for authentication
+export AUTH0_RSA256_PUBLIC_KEY=<AUTH0_PUBLIC_KEY>
+
+export IGN_HTTP_PORT=8001
+export IGN_SSL_PORT=4431
+export IGN_LOGGER_LOG_STDOUT=true
+```
+
+1. Run the server
+
+```
+./web-server
+```
+
+1. Try the `libs` route using
+
+```
+curl http://localhost:8000/1.0/libs
+```
+
 # Test
 
 1. Create a Test JWT token (this is needed for tests to pass OK -- `go test`)
@@ -163,7 +122,7 @@ will want to start from there.
 
         # Test RSA256 Private key WITHOUT the -----BEGIN RSA PRIVATE KEY----- and -----END RSA PRIVATE KEY-----
         # It is used by token-generator to generate the Test JWT Token
-        export TOKEN_GENERATOR_PRIVATE_RSA256_KEY=MIICWwIBAAKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQABAoGAD+onAtVye4ic7VR7V50DF9bOnwRwNXrARcDhq9LWNRrRGElESYYTQ6EbatXS3MCyjjX2eMhu/aF5YhXBwkppwxg+EOmXeh+MzL7Zh284OuPbkglAaGhV9bb6/5CpuGb1esyPbYW+Ty2PC0GSZfIXkXs76jXAu9TOBvD0ybc2YlkCQQDywg2R/7t3Q2OE2+yo382CLJdrlSLVROWKwb4tb2PjhY4XAwV8d1vy0RenxTB+K5Mu57uVSTHtrMK0GAtFr833AkEA6avx20OHo61Yela/4k5kQDtjEf1N0LfI+BcWZtxsS3jDM3i1Hp0KSu5rsCPb8acJo5RO26gGVrfAsDcIXKC+bQJAZZ2XIpsitLyPpuiMOvBbzPavd4gY6Z8KWrfYzJoI/Q9FuBo6rKwl4BFoToD7WIUS+hpkagwWiz+6zLoX1dbOZwJACmH5fSSjAkLRi54PKJ8TFUeOP15h9sQzydI8zJU+upvDEKZsZc/UhT/SySDOxQ4G/523Y0sz/OZtSWcol/UMgQJALesy++GdvoIDLfJX5GBQpuFgFenRiRDabxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw==
+        export TOKEN_GENERATOR_PRIVATE_RSA256_KEY=MIICWwIBAAKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1Cos8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQABAoGAD+onAtVye4ic7VR7V50DF9bOnwRwNXrARcDhq9LWNRrRGElESYYTQ6EbatXS3MCyjjX2eMhu/aF5YhXBwkppwxg+EOmXeh+MzL7Zh284OuPbkglAaGhV9bb6/5CpuGb1esyPbYW+Ty2PC0GSZfIXkXs76jXAu9TOBvD0ybc2YlkCQQDywg2R/7t3Q2OE2+yo382CLJdrlSLVROWKwb4tb2PjhY4XAwV8d1vy0RenxTB+K5Mu57uVSTHtrMK0GAtFr833AkEA6avx20OHo61Yela/4k5kQDtjEf1N0LfI+BcWZtxsS3jDM3i1Hp0KSu5rsCPb8acJo5RO26gGVrfAsDcIXKC+bQJAZZ2XIpsitLyPpuiMOvBbzPavd4gY6Z8KWrfYzJoI/Q9FuBo6rKwl4BFoToD7WIUS+hpkagwWiz+6zLoX1dbOZwJACmH5fSSjAkLRi54PKJ8TFUeOP15h9sQzydI8zJU+upvDEKZsZc/UhT/SySDOxQ4G/523Y0sz/OZtSWcol/UMgQJALesy++GdvoIDLfJX5GBQpuFgFenRiRDabxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw==
 
         # JWT Token generated by the token-generator program using the above Test RSA keys
         # This token does not expire.
