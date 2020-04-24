@@ -49,9 +49,6 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-// Impl note: we move this as a constant as it is used by tests.
-const sysAdminForTest = "rootfortests"
-
 type appConfig struct {
 	SysAdmin          string `env:"IGN_WEBSERVER_SYSTEM_ADMIN"`
 	isGoTest          bool
@@ -59,7 +56,6 @@ type appConfig struct {
 	VersionPassword   string `env:"IGN_VERSION_PASSWORD"`
 	SSLport           string `env:"IGN_WEBSERVER_SSL_PORT" envDefault:":4430"`
 	HTTPport          string `env:"IGN_WEBSERVER_HTTP_PORT" envDefault:":8000"`
-	logger            ign.Logger
 }
 
 /////////////////////////////////////////////////

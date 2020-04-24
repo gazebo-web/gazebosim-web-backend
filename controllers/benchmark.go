@@ -24,7 +24,7 @@ func (b *singleDateResult) MarshalJSON() ([]byte, error) {
 func getBenchmarkDate(tx *gorm.DB, w http.ResponseWriter, r *http.Request, benchmarkLibID uint, date string) (interface{}, *ign.ErrMsg) {
 	type Results struct {
 		Name     string  `json:"name"`
-		CpuTime  float64 `json:"cpu_time"`
+		CPUTime  float64 `json:"cpu_time"`
 		RealTime float64 `json:"real_time"`
 	}
 
@@ -146,7 +146,7 @@ func BenchmarkSummary(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (inte
 	return benchmarkLib, nil
 }
 
-// PerformanceCreate creates a new benchmark metric
+// BenchmarkCreate creates a new benchmark metric
 // You can request this method with the following curl request:
 // curl -k -X POST -d @result.json http://localhost:8000/1.0/benchmarks/{library}
 func BenchmarkCreate(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ign.ErrMsg) {
@@ -195,8 +195,8 @@ func BenchmarkCreate(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (inter
 		}
 
 		// Get the raw json so that we can keep the original benchmark
-		var rawJson []byte
-		rawJson, _ = json.Marshal(bSubmission)
+		var rawJSON []byte
+		rawJSON, _ = json.Marshal(bSubmission)
 
 		// Create the benchmark series instance
 		benchmarkSeriesInstance := models.BenchmarkSeriesInstance{
@@ -206,7 +206,7 @@ func BenchmarkCreate(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (inter
 			RealTime:   bSubmission.RealTime,
 			CpuTime:    bSubmission.CpuTime,
 			TimeUnit:   bSubmission.TimeUnit,
-			Raw:        rawJson,
+			Raw:        rawJSON,
 		}
 
 		// Store and save the data

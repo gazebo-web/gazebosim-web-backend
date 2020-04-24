@@ -12,7 +12,8 @@ require (
 	github.com/go-playground/locales v0.12.1
 	github.com/go-playground/universal-translator v0.16.0
 	github.com/go-sql-driver/mysql v1.4.1
-	github.com/golang/protobuf v1.2.0
+	github.com/golang/protobuf v1.3.2
+	github.com/golangci/golangci-lint v1.25.0 // indirect
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/mux v1.6.2
 	github.com/jinzhu/gorm v1.9.2
@@ -21,11 +22,13 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/jpillora/go-ogle-analytics v0.0.0-20161213085824-14b04e0594ef
 	github.com/leodido/go-urn v1.1.0
-	github.com/pkg/errors v0.8.0
+	github.com/pkg/errors v0.8.1
 	github.com/rollbar/rollbar-go v1.0.2
 	github.com/satori/go.uuid v1.1.1-0.20180103003558-063359185d32
 	gitlab.com/ignitionrobotics/web/ign-go v0.0.0-20200317153227-9d6e4a6aa324
-	google.golang.org/appengine v1.3.0
+	golang.org/x/lint v0.0.0-20200302205851-738671d3881b // indirect
+	golang.org/x/tools v0.0.0-20200423205358-59e73619c742 // indirect
+	google.golang.org/appengine v1.4.0
 	gopkg.in/go-playground/validator.v9 v9.24.0
-	gopkg.in/yaml.v2 v2.2.2
+	gopkg.in/yaml.v2 v2.2.8
 )

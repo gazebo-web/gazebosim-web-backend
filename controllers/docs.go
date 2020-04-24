@@ -18,24 +18,24 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 	// versionDirs, err := ioutil.ReadDir("docs")
 
 	type Page struct {
-		Name        string `json:"name", yaml:"name"`
-		Title       string `json:"title", yaml:"title"`
-		File        string `json:"file", yaml:"file"`
-		Description string `json:"description", yaml:"description"`
-		Children    []Page `json:"children", yaml:"children"`
+		Name        string `json:"name" yaml:"name"`
+		Title       string `json:"title" yaml:"title"`
+		File        string `json:"file" yaml:"file"`
+		Description string `json:"description" yaml:"description"`
+		Children    []Page `json:"children" yaml:"children"`
 	}
 	type Pages struct {
-		Pages []Page `json:"pages", yaml:"pages"`
+		Pages []Page `json:"pages" yaml:"pages"`
 	}
 
 	type RootIndex struct {
-		Pages    []Page   `json:"pages", yaml:"pages"`
-		Releases []string `json:"releases", yaml:"releases"`
+		Pages    []Page   `json:"pages" yaml:"pages"`
+		Releases []string `json:"releases" yaml:"releases"`
 	}
 
 	type DocsInfo struct {
 		Versions []string          `json:"versions"`
-		Pages    map[string][]Page `json:"pages", yaml:"pages"`
+		Pages    map[string][]Page `json:"pages" yaml:"pages"`
 	}
 	var result DocsInfo
 
@@ -58,7 +58,7 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 			data, _ := ioutil.ReadFile(file)
 
 			var pageData Pages
-			err = yaml.Unmarshal(data, &pageData)
+			_ = yaml.Unmarshal(data, &pageData)
 			result.Pages[v] = make([]Page, len(pageData.Pages))
 			copy(result.Pages[v], pageData.Pages)
 		}
@@ -73,7 +73,7 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 func DocsPage(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ign.ErrMsg) {
 	params := mux.Vars(r)
 
-	page, valid := params["page"]
+	page := params["page"]
 	version, valid := params["version"]
 	if version == "all" {
 		version = ""
