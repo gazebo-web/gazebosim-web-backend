@@ -5,10 +5,10 @@ import (
 	"github.com/gorilla/mux"
 	"time"
 
-	"gitlab.com/ignitionrobotics/web/ign-go"
-	"gitlab.com/ignitionrobotics/web/web-server/models"
 	"encoding/json"
 	"github.com/jinzhu/gorm"
+	"gitlab.com/ignitionrobotics/web/ign-go"
+	"gitlab.com/ignitionrobotics/web/web-server/models"
 	"net/http"
 )
 

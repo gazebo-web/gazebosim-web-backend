@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"gitlab.com/ignitionrobotics/web/ign-go"
-	"gitlab.com/ignitionrobotics/web/web-server/globals"
-	"gitlab.com/ignitionrobotics/web/web-server/models"
 	"encoding/json"
 	"errors"
 	"github.com/jinzhu/gorm"
+	"gitlab.com/ignitionrobotics/web/ign-go"
+	"gitlab.com/ignitionrobotics/web/web-server/globals"
+	"gitlab.com/ignitionrobotics/web/web-server/models"
 	"net/http"
 	"sort"
 	"strings"

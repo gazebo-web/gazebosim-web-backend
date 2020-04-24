@@ -1,8 +1,8 @@
 package globals
 
 import (
-	"gitlab.com/ignitionrobotics/web/ign-go"
 	"github.com/go-playground/form"
+	"gitlab.com/ignitionrobotics/web/ign-go"
 	"gopkg.in/go-playground/validator.v9"
 )
 
