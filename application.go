@@ -97,7 +97,7 @@ func init() {
 	}
 
 	var err error
-	globals.Server, err = ign.Init(cfg.Auth0RsaPublickey)
+	globals.Server, err = ign.Init(cfg.Auth0RsaPublickey, "")
 
 	if err != nil {
 		logger.Critical(err)
