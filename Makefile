@@ -2,7 +2,7 @@
 
 GOPATH:=${PWD}
 
-APP:=bitbucket.org/ignitionrobotics/ign-fuelserver
+APP:=gitlab.com/ignitionrobotics/web/web-server
 
 default: all
 

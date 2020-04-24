@@ -2,8 +2,8 @@
 
 
 [[projects]]
-  branch = "default"
-  name = "bitbucket.org/ignitionrobotics/ign-go"
+  branch = "master"
+  name = "gitlab.com/ignitionrobotics/web/ign-go"
   packages = ["."]
   revision = "d18aae9517e892a8c310cb1c1db5054290b1efbc"
 

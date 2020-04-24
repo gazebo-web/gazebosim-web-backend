@@ -7,9 +7,9 @@ RUN apt-get update && apt-get install -y nano vim &&  \
   git config --global user.name "ign-webserver"  &&  \
   git config --global user.email "ign-webserver@test.org"
 
-RUN mkdir -p /go/src/bitbucket.org/ignitionrobotics/ign-webserver
-COPY . /go/src/bitbucket.org/ignitionrobotics/ign-webserver
-WORKDIR /go/src/bitbucket.org/ignitionrobotics/ign-webserver
+RUN mkdir -p /go/src/gitlab.com/ignitionrobotics/web/web-server
+COPY . /go/src/gitlab.com/ignitionrobotics/web/web-server
+WORKDIR /go/src/gitlab.com/ignitionrobotics/web/web-server
 
 # Install go dep
 RUN curl -fsSL -o /usr/local/bin/dep https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64 && chmod +x /usr/local/bin/dep
@@ -17,7 +17,7 @@ RUN curl -fsSL -o /usr/local/bin/dep https://github.com/golang/dep/releases/down
 RUN dep ensure -vendor-only
 
 # Install documentation
-RUN hg clone https://bitbucket.org/ignitionrobotics/docs -b default 
+RUN git clone https://github.com/ignitionrobotics/docs -b master
 
 # Build app
 RUN go install

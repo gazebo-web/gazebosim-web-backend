@@ -34,8 +34,8 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"bitbucket.org/ignitionrobotics/ign-go"
-	"bitbucket.org/ignitionrobotics/ign-webserver/globals"
+	"gitlab.com/ignitionrobotics/web/ign-go"
+	"gitlab.com/ignitionrobotics/web/web-server/globals"
 
 	// "context"
 	"flag"
