@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"gitlab.com/ignitionrobotics/web/ign-go"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"gitlab.com/ignitionrobotics/web/ign-go"
 	"gopkg.in/yaml.v2"
 )
 
