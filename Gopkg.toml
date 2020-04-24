@@ -26,8 +26,8 @@
 
 
 [[constraint]]
-  branch = "default"
-  name = "bitbucket.org/ignitionrobotics/ign-go"
+  branch = "master"
+  name = "gitlab.com/ignitionrobotics/web/ign-go"
 
 [[constraint]]
   name = "github.com/caarlos0/env"

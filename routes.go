@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bitbucket.org/ignitionrobotics/ign-go"
-	"bitbucket.org/ignitionrobotics/ign-webserver/controllers"
+	"gitlab.com/ignitionrobotics/web/ign-go"
+	"gitlab.com/ignitionrobotics/web/web-server/controllers"
 )
 
 // Routes declares the routes

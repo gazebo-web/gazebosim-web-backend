@@ -5,8 +5,8 @@ import (
 	"github.com/gorilla/mux"
 	"time"
 
-	"bitbucket.org/ignitionrobotics/ign-go"
-	"bitbucket.org/ignitionrobotics/ign-webserver/models"
+	"gitlab.com/ignitionrobotics/web/ign-go"
+	"gitlab.com/ignitionrobotics/web/web-server/models"
 	"encoding/json"
 	"github.com/jinzhu/gorm"
 	"net/http"

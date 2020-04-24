@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"bitbucket.org/ignitionrobotics/ign-go"
+	"gitlab.com/ignitionrobotics/web/ign-go"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
 	"gopkg.in/yaml.v2"

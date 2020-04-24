@@ -40,7 +40,7 @@ will want to start from there.
 1. Download server code into new directories in the workspace:
 
     ```
-    hg clone https://bitbucket.org/ignitionrobotics/ign-webserver ~/go_ws/src/bitbucket.org/ignitionrobotics/ign-webserver
+    git clone https://gitlab.com/ignitionrobotics/web/web-server ~/go_ws/src/gitlab.com/ignitionrobotics/web/web-server
     ```
 
 1. Set necessary environment variable (needs to be set every time the environment is built)
@@ -76,7 +76,7 @@ will want to start from there.
 1. Install dependencies
 
     ```
-    cd ~/go_ws/src/bitbucket.org/ignitionrobotics/ign-webserver
+    cd ~/go_ws/src/gitlab.com/ignitionrobotics/web/web-server
     ```
 
     Download dependencies into `vendor` folder:
@@ -90,14 +90,14 @@ will want to start from there.
     execute the following statement regularly to download the latest version of ign-go.
 
         # Xenial
-        $GOPATH/bin/dep ensure -update bitbucket.org/ignitionrobotics/ign-go
+        $GOPATH/bin/dep ensure -update gitlab.com/ignitionrobotics/web/ign-go
         # Bionic
         ~/go_ws/bin/dep ensure
 
 1. Build the application
 
     ```
-    cd ~/go_ws/src/bitbucket.org/ignitionrobotics/ign-webserver
+    cd ~/go_ws/src/gitlab.com/ignitionrobotics/web/web-server
     ```
 
     ```
@@ -226,7 +226,7 @@ will want to start from there.
     Then, run all tests:
 
     ```
-    go test bitbucket.org/ignitionrobotics/ign-webserver
+    go test gitlab.com/ignitionrobotics/web/web-server
     ```
 
 1. Run the backend server
@@ -240,7 +240,7 @@ will want to start from there.
 
 # Environment Variables
 
-You may want to create an `.env` file to define environment vars. Remember to add it to `.hgignore`. This `.env` will be automatically loaded by the server.
+You may want to create an `.env` file to define environment vars. Remember to add it to `.gitignore`. This `.env` will be automatically loaded by the server.
 
 
 # Linter
@@ -258,7 +258,7 @@ You may want to create an `.env` file to define environment vars. Remember to ad
 1. Run the linter
 
     ```
-    ./bin/gometalinter $(go list bitbucket.org/ignitionrobotics/ign-webserver/...)
+    ./bin/gometalinter $(go list gitlab.com/ignitionrobotics/web/web-server/...)
     ```
 
 Note you can create this bash script:
@@ -266,7 +266,7 @@ Note you can create this bash script:
 ```
 #!/bin/bash
 curl -L https://git.io/vp6lP | sh -s -- -b $GOPATH/bin
-$GOPATH/bin/gometalinter $(go list bitbucket.org/ignitionrobotics/ign-webserver/...)
+$GOPATH/bin/gometalinter $(go list gitlab.com/ignitionrobotics/web/web-server/...)
 ```
 
 # Development

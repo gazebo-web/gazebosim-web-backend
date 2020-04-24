@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"bitbucket.org/ignitionrobotics/ign-go"
-	"bitbucket.org/ignitionrobotics/ign-webserver/globals"
-	"bitbucket.org/ignitionrobotics/ign-webserver/models"
+	"gitlab.com/ignitionrobotics/web/ign-go"
+	"gitlab.com/ignitionrobotics/web/web-server/globals"
+	"gitlab.com/ignitionrobotics/web/web-server/models"
 	"encoding/json"
 	"errors"
 	"github.com/jinzhu/gorm"
@@ -67,7 +67,7 @@ func LibsList(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{},
 
 // LibsCreate creates a new library
 // You can request this method with the following curl request:
-// curl -k -X POST -d '{"name":"math", "repo":"https://bitbucket.org/ignitionrobotics/ign-math", "description":"Math description","password":"secret"}' http://localhost:8000/1.0/libs
+// curl -k -X POST -d '{"name":"math", "repo":"https://github.com/ignitionrobotics/ign-math", "description":"Math description","password":"secret"}' http://localhost:8000/1.0/libs
 func LibsCreate(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ign.ErrMsg) {
 
 	type Data struct {
