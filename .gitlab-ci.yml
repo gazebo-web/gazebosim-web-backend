@@ -55,7 +55,7 @@ build:
 # Deploying stage
 
 staging:
-  image: python:3.5
+  image: registry.gitlab.com/ignitionrobotics/web/images/web-server-pipelines
   stage: deploying
   dependencies:
     - build
@@ -71,7 +71,7 @@ staging:
   when: manual
 
 production:
-  image: python:3.5
+  image: registry.gitlab.com/ignitionrobotics/web/images/web-server-pipelines
   stage: deploying
   dependencies:
     - build
