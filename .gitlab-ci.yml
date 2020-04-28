@@ -13,8 +13,7 @@ stages:
   - linting
   - testing
   - building
-#  - packaging
-#  - deploying
+  - deploying
 
 ##########################################################
 # Formatting stage
@@ -51,3 +50,37 @@ build:
   stage: building
   script:
     - go build
+
+##########################################################
+# Deploying stage
+
+staging:
+  image: registry.gitlab.com/ignitionrobotics/web/images/web-server-pipelines
+  stage: deploying
+  dependencies:
+    - build
+  script:
+    - zip -r artifact.zip * .ebextensions 
+    - python beanstalk_deploy.py
+  environment:
+    name: staging
+    url: https://ignitionrobotics-staging.us-east-1.elasticbeanstalk.com/1.0
+  only:
+    - "/^release\\/.*$/"
+    - develop
+  when: manual
+
+production:
+  image: registry.gitlab.com/ignitionrobotics/web/images/web-server-pipelines
+  stage: deploying
+  dependencies:
+    - build
+  script:
+    - zip -r artifact.zip * .ebextensions
+    - python beanstalk_deploy.py
+  environment:
+    name: production
+    url: https://ignitionrobotics-production.us-east-1.elasticbeanstalk.com/1.0
+  only:
+    - master
+  when: manual
