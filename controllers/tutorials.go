@@ -10,7 +10,7 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-// Docs returns a map of version names to array of tutorial names.
+// Tutorials returns a map of version names to array of tutorial names.
 func Tutorials(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ign.ErrMsg) {
 	// Get all subdirectories in the "docs" folder
 	// versionDirs, err := ioutil.ReadDir("docs")
