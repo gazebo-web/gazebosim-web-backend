@@ -9,33 +9,32 @@ variables:
 # Stages
 
 stages:
-  - formatting
-  - linting
-  - testing
+  - format
+  - test
   - building
   - deploying
 
 ##########################################################
-# Formatting stage
+# Format stage
 
-format:
-  stage: formatting
+fmt:
+  stage: format
   script:
     - go fmt $(go list ./...)
 
-##########################################################
-# Linting stage
-
 lint:
-  stage: linting
+  stage: format
+  before_script:
+    - $GOPATH/bin/golangci-lint --version
   script:
-    - /root/go/bin/golangci-lint run
+    - $GOPATH/bin/golangci-lint run --skip-dirs vcs --disable-all  --enable=golint --enable=varcheck --enable=maligned --enable=interfacer --timeout=2m0s
+  allow_failure: true
 
 ##########################################################
 # Testing stage
 
 test:
-  stage: testing
+  stage: test
   script:
     - go test $(go list ./...)
   services:

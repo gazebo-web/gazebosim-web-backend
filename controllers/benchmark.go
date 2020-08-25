@@ -62,7 +62,7 @@ func getBenchmarkSeries(tx *gorm.DB, w http.ResponseWriter, r *http.Request, ben
 	for _, seriesInstance := range benchmark.Series {
 		cpuSeries.Series = append(cpuSeries.Series, DataPoint{
 			Name:  seriesInstance.Date,
-			Value: seriesInstance.CpuTime,
+			Value: seriesInstance.CPUTime,
 		})
 
 		realSeries.Series = append(realSeries.Series, DataPoint{
@@ -204,7 +204,7 @@ func BenchmarkCreate(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (inter
 			RunType:    bSubmission.RunType,
 			Iterations: bSubmission.Iterations,
 			RealTime:   bSubmission.RealTime,
-			CpuTime:    bSubmission.CpuTime,
+			CPUTime:    bSubmission.CPUTime,
 			TimeUnit:   bSubmission.TimeUnit,
 			Raw:        rawJSON,
 		}
