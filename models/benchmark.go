@@ -33,7 +33,7 @@ type BenchmarkInstanceSubmission struct {
 	RunType    string  `json:"run_type"`
 	Iterations uint    `json:"iterations"`
 	RealTime   float64 `json:"real_time"`
-	CpuTime    float64 `json:"cpu_time"`
+	CPUTime    float64 `json:"cpu_time"`
 	TimeUnit   string  `json:"time_unit"`
 }
 
@@ -65,10 +65,10 @@ type BenchmarkSeriesInstance struct {
 	// RealTime is the wall-clock time it took to complete the test.
 	RealTime float64 `json:"real_time"`
 
-	// CpuTime is the CPU time it took to complete the test.
-	CpuTime float64 `json:"cpu_time"`
+	// CPUTime is the CPU time it took to complete the test.
+	CPUTime float64 `json:"cpu_time"`
 
-	// TimeUnit is the  units of time measured by CpuTime and RealTime.
+	// TimeUnit is the  units of time measured by CPUTime and RealTime.
 	TimeUnit string `json:"time_unit"`
 
 	// Json is the raw json data, which could contain extra information.
