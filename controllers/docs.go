@@ -28,13 +28,20 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 		Pages []Page `json:"pages" yaml:"pages"`
 	}
 
+	type ReleaseVersion struct {
+		Name        string `json:"name", yaml:"name"`
+		LTS         bool   `json:"lts", yaml:"lts"`
+		EOL         bool   `json:"eol", yaml:"eol"`
+		Description string `json:"description", yaml:"description"`
+	}
+
 	type RootIndex struct {
-		Pages    []Page   `json:"pages" yaml:"pages"`
-		Releases []string `json:"releases" yaml:"releases"`
+		Pages    []Page           `json:"pages" yaml:"pages"`
+		Releases []ReleaseVersion `json:"releases" yaml:"releases"`
 	}
 
 	type DocsInfo struct {
-		Versions []string          `json:"versions"`
+		Versions []ReleaseVersion  `json:"versions"`
 		Pages    map[string][]Page `json:"pages" yaml:"pages"`
 	}
 	var result DocsInfo
@@ -54,13 +61,13 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 		for _, v := range rootIndex.Releases {
 			// Get all files in the versioned directory
 			result.Versions = append(result.Versions, v)
-			file := filepath.Join("docs", v, "index.yaml")
+			file := filepath.Join("docs", v.Name, "index.yaml")
 			data, _ := ioutil.ReadFile(file)
 
 			var pageData Pages
 			_ = yaml.Unmarshal(data, &pageData)
-			result.Pages[v] = make([]Page, len(pageData.Pages))
-			copy(result.Pages[v], pageData.Pages)
+			result.Pages[v.Name] = make([]Page, len(pageData.Pages))
+			copy(result.Pages[v.Name], pageData.Pages)
 		}
 	} else {
 		return result, ign.NewErrorMessageWithBase(ign.ErrorFileNotFound, err)
