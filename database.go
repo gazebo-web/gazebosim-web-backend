@@ -476,6 +476,19 @@ func DBAddDefaults() {
 			Repo:        "https://github.com/ignitionrobotics/ign-sensors",
 			Description: "A large set of sensor and noise models suitable for generating realistic data in simulation.",
 		},
+		{
+			Name: "SDFormat",
+			Versions: models.Versions{
+				{
+					Major:       0,
+					Minor:       1,
+					Patch:       0,
+					ReleaseDate: time.Now(),
+				},
+			},
+			Repo:        "https://github.com/osrf/sdformat",
+			Description: "Simulation Description Format parser and description files.",
+		},
 	}
 
 	// Insert the libraries if they do not exist
