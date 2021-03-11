@@ -501,7 +501,7 @@ func DBAddDefaults() {
 			},
 
 			Repo:        "https://github.com/ignitionrobotics/ign-utils",
-			Description: "General purpose classes and functions with minimal dependencies.",
+			Description: "General purpose classes and functions with minimal dependencies. It includes command line parsing, a helper class to implement the PIMPL pattern, macros to suppress warnings, etc.",
 		},
 	}
 
