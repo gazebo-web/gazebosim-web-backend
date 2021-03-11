@@ -11,7 +11,7 @@ COPY . /root/web-server
 WORKDIR /root/web-server
 
 # Install documentation
-RUN git clone https://github.com/ignitionrobotics/docs -b master
+RUN git clone https://github.com/ignitionrobotics/docs
 
 # Build app
 RUN go build
