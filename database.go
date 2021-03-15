@@ -489,6 +489,20 @@ func DBAddDefaults() {
 			Repo:        "https://github.com/osrf/sdformat",
 			Description: "Simulation Description Format parser and description files.",
 		},
+		{
+			Name: "Utils",
+			Versions: models.Versions{
+				{
+					Major:       0,
+					Minor:       1,
+					Patch:       0,
+					ReleaseDate: time.Now(),
+				},
+			},
+
+			Repo:        "https://github.com/ignitionrobotics/ign-utils",
+			Description: "General purpose classes and functions with minimal dependencies. It includes command line parsing, a helper class to implement the PIMPL pattern, macros to suppress warnings, etc.",
+		},
 	}
 
 	// Insert the libraries if they do not exist
