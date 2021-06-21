@@ -22,6 +22,7 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 		Title       string `json:"title" yaml:"title"`
 		File        string `json:"file" yaml:"file"`
 		Description string `json:"description" yaml:"description"`
+		Unlisted    string `json:"unlisted" yaml:"unlisted"`
 		Children    []Page `json:"children" yaml:"children"`
 	}
 	type Pages struct {
