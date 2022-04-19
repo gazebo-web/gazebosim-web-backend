@@ -4,8 +4,8 @@
   ],
   "swagger": "2.0",
   "info": {
-    "description": "This package provides a REST API to the Ignition Fuel server.",
-    "title": "Ignition Fuel Server RESET API",
+    "description": "This package provides a REST API to the Gazebosim backend web server.",
+    "title": "Gazebosim REST API",
     "contact": {
       "email": "info@openrobotics.org"
     },
@@ -14,7 +14,7 @@
     },
     "version": "0.1.0"
   },
-  "host": "staging-api.ignitionfuel.org",
+  "host": "staging-api.gazebosim.org",
   "basePath": "/1.0",
   "paths": {
     "/licenses": {
@@ -287,12 +287,12 @@
           "x-go-name": "URLName"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "FileResponse": {
       "description": "FileResponse it is used to represent a File response (any file) type\nin swagger documentation.\nTODO: we should find the swagger proper way to represent responses as\nany files, without creating a new type here.",
       "type": "object",
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "License": {
       "description": "License is a license name and ID",
@@ -318,7 +318,7 @@
           "x-go-name": "ContentURL"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "Model": {
       "type": "object",
@@ -424,7 +424,7 @@
           "x-go-name": "Uuid"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/proto"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/proto"
     },
     "ModelFileTree": {
       "type": "object",
@@ -445,7 +445,7 @@
           "x-go-name": "Uuid"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/proto"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/proto"
     },
     "ModelFileTree_FileNode": {
       "type": "object",
@@ -466,7 +466,7 @@
           "x-go-name": "Path"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/proto"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/proto"
     },
     "Models": {
       "description": "Models is an array of Model",
@@ -483,7 +483,7 @@
           "x-go-name": "Models"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/proto"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/proto"
     },
     "Tag": {
       "description": "Tag is a string that can be used to mark other resources, such as models\nand worlds",
@@ -500,7 +500,7 @@
         },
         "UpdatedAt": {}
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "Tags": {
       "description": "Tags is an array of Tag",
@@ -508,7 +508,7 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "Team": {
       "description": "Team is a group of users",
@@ -532,7 +532,7 @@
           "x-go-name": "Teamname"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "Teams": {
       "description": "Teams is an array of Team",
@@ -540,7 +540,7 @@
       "items": {
         "$ref": "#/definitions/Team"
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "User": {
       "description": "User information",
@@ -604,7 +604,7 @@
           "x-go-name": "Username"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "UserResponse": {
       "description": "UserResponse stores user information used in REST replies",
@@ -633,7 +633,7 @@
           "x-go-name": "Username"
         }
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     },
     "Users": {
       "description": "Users is an array of User",
@@ -641,7 +641,7 @@
       "items": {
         "$ref": "#/definitions/User"
       },
-      "x-go-package": "gitlab.com/ignitionrobotics/web/web-server/models"
+      "x-go-package": "github.com/gazebo-web/gazebosim-web-backend/models"
     }
   }
 }

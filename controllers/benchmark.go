@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"github.com/jinzhu/gorm"
 	"gitlab.com/ignitionrobotics/web/ign-go"
-	"gitlab.com/ignitionrobotics/web/web-server/models"
+	"github.com/gazebo-web/gazebosim-web-backend/models"
 	"net/http"
 )
 

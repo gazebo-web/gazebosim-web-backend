@@ -2,7 +2,7 @@
 
 GOPATH:=${PWD}
 
-APP:=gitlab.com/ignitionrobotics/web/web-server
+APP:=github.com/gazebo-web/gazebosim-web-backedn
 
 default: all
 

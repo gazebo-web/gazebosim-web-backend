@@ -2,8 +2,8 @@ package main
 
 // Import this file's dependencies
 import (
-	"gitlab.com/ignitionrobotics/web/web-server/globals"
-	"gitlab.com/ignitionrobotics/web/web-server/models"
+	"github.com/gazebo-web/gazebosim-web-backend/globals"
+	"github.com/gazebo-web/gazebosim-web-backend/models"
 	"log"
 	"time"
 )
@@ -66,7 +66,7 @@ func DBAddDefaults() {
 				},
 			},
 
-			Repo:        "https://github.com/ignitionrobotics/ign-common",
+			Repo:        "https://github.com/gazebosim/gz-common",
 			Description: "A collection of useful classes and functions for handling many command tasks. This includes parsing 3D mesh files, managing console output, and using PID controllers.",
 		},
 		{
@@ -212,7 +212,7 @@ func DBAddDefaults() {
 				},
 			},
 
-			Repo:        "https://github.com/ignitionrobotics/ign-math",
+			Repo:        "https://github.com/gazebosim/gz-math",
 			Description: "A small, fast, and high performance math library. This library is a self-contained set of classes and functions suitable for robot applications.",
 		},
 		{
@@ -273,8 +273,8 @@ func DBAddDefaults() {
 					ReleaseDate: getTime("2017-01-19T14:56:00+01:00"),
 				},
 			},
-			Repo:        "https://github.com/ignitionrobotics/ign-msgs",
-			Description: "Standard set of message definitions, used by Ignition Transport, and other applications.",
+			Repo:        "https://github.com/gazebosim/gz-msgs",
+			Description: "Standard set of message definitions, used by Gazebo Transport, and other applications.",
 		},
 		{
 			Name: "Transport",
@@ -419,7 +419,7 @@ func DBAddDefaults() {
 				},
 			},
 
-			Repo:        "https://github.com/ignitionrobotics/ign-transport",
+			Repo:        "https://github.com/gazebosim/gz-transport",
 			Description: "The transport library combines ZeroMQ with Protobufs to create a fast and efficient message passing system. Asynchronous message publication and subscription is provided along with service calls and discovery.",
 		},
 		{
@@ -433,7 +433,7 @@ func DBAddDefaults() {
 				},
 			},
 
-			Repo:        "https://github.com/ignitionrobotics/ign-physics",
+			Repo:        "https://github.com/gazebosim/gz-physics",
 			Description: "A plugin based interface to physics engines, such as ODE, Bullet, and DART.",
 		},
 		{
@@ -447,7 +447,7 @@ func DBAddDefaults() {
 				},
 			},
 
-			Repo:        "https://github.com/ignitionrobotics/ign-rendering",
+			Repo:        "https://github.com/gazebosim/gz-rendering",
 			Description: "A plugin based interface to rendering engines, such as OGRE and Optix.",
 		},
 		{
@@ -460,8 +460,8 @@ func DBAddDefaults() {
 					ReleaseDate: time.Now(),
 				},
 			},
-			Repo:        "https://github.com/ignitionrobotics/ign-gui",
-			Description: "A framework for graphical user interfaces centered around QT. Each component in Ignition GUI is an independent plugin",
+			Repo:        "https://github.com/gazebosim/gz-gui",
+			Description: "A framework for graphical user interfaces centered around QT. Each component in Gazebo GUI is an independent plugin",
 		},
 		{
 			Name: "Sensors",
@@ -473,7 +473,7 @@ func DBAddDefaults() {
 					ReleaseDate: time.Now(),
 				},
 			},
-			Repo:        "https://github.com/ignitionrobotics/ign-sensors",
+			Repo:        "https://github.com/gazebosim/gz-sensors",
 			Description: "A large set of sensor and noise models suitable for generating realistic data in simulation.",
 		},
 		{
@@ -500,7 +500,7 @@ func DBAddDefaults() {
 				},
 			},
 
-			Repo:        "https://github.com/ignitionrobotics/ign-utils",
+			Repo:        "https://github.com/gazebosim/gz-utils",
 			Description: "General purpose classes and functions with minimal dependencies. It includes command line parsing, a helper class to implement the PIMPL pattern, macros to suppress warnings, etc.",
 		},
 	}

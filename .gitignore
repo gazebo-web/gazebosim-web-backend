@@ -1,8 +1,9 @@
 # CMake folders
 build
 build_*
-web-server
+gazebosim-web-backend
 .env
+docs
 
 # OS generated files
 .DS_Store

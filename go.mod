@@ -1,4 +1,4 @@
-module gitlab.com/ignitionrobotics/web/web-server
+module github.com/gazebo-web/gazebosim-web-backend
 
 go 1.14
 

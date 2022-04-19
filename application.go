@@ -1,9 +1,9 @@
-// Package main Ignition Fuel Server RESET API
+// Package main Gazebo Server RESET API
 //
-// This package provides a REST API to the Ignition Fuel server.
+// This package provides a REST API to the Gazebo server.
 //
 // Schemes: https
-// Host: staging-api.ignitionfuel.org
+// Host: staging-api.gazebosim.org
 // BasePath: /1.0
 // Version: 0.1.0
 // License: Apache 2.0
@@ -21,7 +21,7 @@ package main
 //     type: apiKey
 //     name: authorization
 //     in: header
-//     description: Ignition Fuel token
+//     description: Gazebo token
 //   auth0:
 //     type: apiKey
 //     name: authorization
@@ -35,7 +35,7 @@ import (
 	"path/filepath"
 
 	"gitlab.com/ignitionrobotics/web/ign-go"
-	"gitlab.com/ignitionrobotics/web/web-server/globals"
+	"github.com/gazebo-web/gazebosim-web-backend/globals"
 
 	// "context"
 	"flag"
@@ -50,12 +50,12 @@ import (
 )
 
 type appConfig struct {
-	SysAdmin          string `env:"IGN_WEBSERVER_SYSTEM_ADMIN"`
+	SysAdmin          string `env:"GZ_WEBSERVER_SYSTEM_ADMIN"`
 	isGoTest          bool
 	Auth0RsaPublickey string `env:"AUTH0_RSA256_PUBLIC_KEY"`
-	VersionPassword   string `env:"IGN_VERSION_PASSWORD"`
-	SSLport           string `env:"IGN_WEBSERVER_SSL_PORT" envDefault:":4430"`
-	HTTPport          string `env:"IGN_WEBSERVER_HTTP_PORT" envDefault:":8000"`
+	VersionPassword   string `env:"GZ_VERSION_PASSWORD"`
+	SSLport           string `env:"GZ_WEBSERVER_SSL_PORT" envDefault:":4430"`
+	HTTPport          string `env:"GZ_WEBSERVER_HTTP_PORT" envDefault:":8000"`
 }
 
 /////////////////////////////////////////////////
@@ -88,7 +88,7 @@ func init() {
 
 	// Get the version password
 	if cfg.VersionPassword == "" {
-		log.Fatalf("Missing IGN_VERSION_PASSWORD env variable.")
+		log.Fatalf("Missing GZ_VERSION_PASSWORD env variable.")
 		return
 	}
 
@@ -153,7 +153,7 @@ func initValidator(cfg appConfig) *validator.Validate {
 
 func initLogging(cfg appConfig) ign.Logger {
 	verbosity := ign.VerbosityWarning
-	if verbStr, verr := ign.ReadEnvVar("IGN_WEBSERVER_VERBOSITY"); verr == nil {
+	if verbStr, verr := ign.ReadEnvVar("GZ_WEBSERVER_VERBOSITY"); verr == nil {
 		verbosity, _ = strconv.Atoi(verbStr)
 	}
 

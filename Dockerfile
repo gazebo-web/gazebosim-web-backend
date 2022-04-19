@@ -4,17 +4,17 @@
 FROM golang:1.14.2
 
 RUN apt-get update && apt-get install -y nano vim &&  \
-  git config --global user.name "ign-webserver"  &&  \
-  git config --global user.email "ign-webserver@test.org"
+  git config --global user.name "gz-webserver"  &&  \
+  git config --global user.email "gz-webserver@test.org"
 
-COPY . /root/web-server
-WORKDIR /root/web-server
+COPY . /root/gazebosim-web-backend
+WORKDIR /root/gazebosim-web-backend
 
 # Install documentation
 RUN git clone https://github.com/ignitionrobotics/docs
 
 # Build app
 RUN go build
-CMD ["./web-server"]
+CMD ["./gazebosim-web-backend"]
 
 EXPOSE 8000
