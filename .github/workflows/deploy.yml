@@ -41,3 +41,14 @@ jobs:
 
       - name: Upload package to S3 bucket
         run: aws s3 cp deploy_package.zip s3://api.gazebosim.org/
+
+      - name: Create new ElasticBeanstalk Application Version
+        run: |
+          aws elasticbeanstalk create-application-version \
+          --application-name gazebosim-web \
+          --source-bundle S3Bucket="api.gazebosim.org",S3Key="deploy_package.zip" \
+          --version-label "ver-${{ github.sha }}" \
+          --description "commit-sha-${{ github.sha }}"
+
+      - name: Deploy new ElasticBeanstalk Application Version
+        run: aws elasticbeanstalk update-environment --environment-name gazebosim-staging --version-label "ver-${{ github.sha }}"
