@@ -3,10 +3,10 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/jinzhu/gorm"
-	"gitlab.com/ignitionrobotics/web/ign-go"
 	"github.com/gazebo-web/gazebosim-web-backend/globals"
 	"github.com/gazebo-web/gazebosim-web-backend/models"
+	"github.com/jinzhu/gorm"
+	"gitlab.com/ignitionrobotics/web/ign-go"
 	"net/http"
 	"sort"
 	"strings"
