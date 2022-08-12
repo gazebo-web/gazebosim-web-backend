@@ -12,7 +12,7 @@ COPY . /root/gazebosim-web-backend
 WORKDIR /root/gazebosim-web-backend
 
 # Install documentation
-RUN git clone https://github.com/gazebosim/docs -b development
+RUN git clone https://github.com/gazebosim/docs
 
 # Build app
 RUN go build
