@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gitlab.com/ignitionrobotics/web/ign-go"
 	"github.com/gazebo-web/gazebosim-web-backend/controllers"
+	"gitlab.com/ignitionrobotics/web/ign-go"
 )
 
 // Routes declares the routes
