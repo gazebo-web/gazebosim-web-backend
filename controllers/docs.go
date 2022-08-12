@@ -29,11 +29,17 @@ func Docs(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{}, *ig
 		Pages []Page `json:"pages" yaml:"pages"`
 	}
 
+	type LibraryVersion struct {
+		Name    string `json:"name", yaml:"name"`
+		Version int    `json:"version", yaml:"version"`
+	}
+
 	type ReleaseVersion struct {
-		Name        string `json:"name", yaml:"name"`
-		LTS         bool   `json:"lts", yaml:"lts"`
-		EOL         bool   `json:"eol", yaml:"eol"`
-		Description string `json:"description", yaml:"description"`
+		Name        string           `json:"name", yaml:"name"`
+		LTS         bool             `json:"lts", yaml:"lts"`
+		EOL         bool             `json:"eol", yaml:"eol"`
+		Description string           `json:"description", yaml:"description"`
+		Libraries   []LibraryVersion `json:"libraries"`
 	}
 
 	type RootIndex struct {

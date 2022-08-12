@@ -38,7 +38,7 @@ func DBAddDefaults() {
 
 	libs := models.Libs{
 		{
-			Name: "Common",
+			Name: "common",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -70,7 +70,7 @@ func DBAddDefaults() {
 			Description: "A collection of useful classes and functions for handling many command tasks. This includes parsing 3D mesh files, managing console output, and using PID controllers.",
 		},
 		{
-			Name: "Math",
+			Name: "math",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -216,7 +216,7 @@ func DBAddDefaults() {
 			Description: "A small, fast, and high performance math library. This library is a self-contained set of classes and functions suitable for robot applications.",
 		},
 		{
-			Name: "Msgs",
+			Name: "msgs",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -277,7 +277,7 @@ func DBAddDefaults() {
 			Description: "Standard set of message definitions, used by Gazebo Transport, and other applications.",
 		},
 		{
-			Name: "Transport",
+			Name: "transport",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -423,7 +423,7 @@ func DBAddDefaults() {
 			Description: "The transport library combines ZeroMQ with Protobufs to create a fast and efficient message passing system. Asynchronous message publication and subscription is provided along with service calls and discovery.",
 		},
 		{
-			Name: "Physics",
+			Name: "physics",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -437,7 +437,7 @@ func DBAddDefaults() {
 			Description: "A plugin based interface to physics engines, such as ODE, Bullet, and DART.",
 		},
 		{
-			Name: "Rendering",
+			Name: "rendering",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -451,7 +451,7 @@ func DBAddDefaults() {
 			Description: "A plugin based interface to rendering engines, such as OGRE and Optix.",
 		},
 		{
-			Name: "GUI",
+			Name: "gui",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -464,7 +464,7 @@ func DBAddDefaults() {
 			Description: "A framework for graphical user interfaces centered around QT. Each component in Gazebo GUI is an independent plugin",
 		},
 		{
-			Name: "Sensors",
+			Name: "sensors",
 			Versions: models.Versions{
 				{
 					Major:       0,
@@ -477,7 +477,7 @@ func DBAddDefaults() {
 			Description: "A large set of sensor and noise models suitable for generating realistic data in simulation.",
 		},
 		{
-			Name: "SDFormat",
+			Name: "sdformat",
 			Versions: models.Versions{
 				{
 					Major:       0,
