@@ -34,8 +34,8 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"gitlab.com/ignitionrobotics/web/ign-go"
 	"github.com/gazebo-web/gazebosim-web-backend/globals"
+	"gitlab.com/ignitionrobotics/web/ign-go"
 
 	// "context"
 	"flag"

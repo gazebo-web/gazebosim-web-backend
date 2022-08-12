@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"encoding/json"
+	"github.com/gazebo-web/gazebosim-web-backend/models"
 	"github.com/jinzhu/gorm"
 	"gitlab.com/ignitionrobotics/web/ign-go"
-	"github.com/gazebo-web/gazebosim-web-backend/models"
 	"net/http"
 )
 
