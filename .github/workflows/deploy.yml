@@ -16,8 +16,9 @@ jobs:
     environment: staging
     steps:
       - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d-%H:%M:%S')"
+        run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      - name: Echo current date
+        run: echo $NOW
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -50,14 +51,14 @@ jobs:
           aws elasticbeanstalk create-application-version \
           --application-name gazebosim-web \
           --source-bundle S3Bucket="api.gazebosim.org",S3Key="deploy_package.zip" \
-          --version-label "ver-${{ github.sha }}-${{steps.date.outpus.date}}" \
-          --description "commit-sha-${{ github.sha }}-date-${{steps.date.outpus.date}}"
+          --version-label "ver-${{ github.sha }}-$NOW" \
+          --description "commit-sha-${{ github.sha }}-date-$NOW"
 
       - name: Deploy new ElasticBeanstalk Application Version
         # Add the `always` in case the application version from the previous
         # step already exists, which would cause a failure.
         if: always()
-        run: aws elasticbeanstalk update-environment --environment-name gazebosim-staging --version-label "ver-${{ github.sha }}-${{steps.date.outpus.date}}"
+        run: aws elasticbeanstalk update-environment --environment-name gazebosim-staging --version-label "ver-${{ github.sha }}-$NOW"
 
 
   production-deploy:
