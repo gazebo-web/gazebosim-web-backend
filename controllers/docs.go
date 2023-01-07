@@ -93,9 +93,15 @@ func DocsPage(tx *gorm.DB, w http.ResponseWriter, r *http.Request) (interface{},
 		version = ""
 	}
 
+	subpage, subpage_valid := params["subpage"]
+	if subpage_valid {
+		page = filepath.Join(filepath.Clean(page), filepath.Clean(subpage))
+	}
+
 	var doc = "# 404"
 	if valid {
 		file := filepath.Join("docs", version, filepath.Clean(page))
+
 		data, err := ioutil.ReadFile(file)
 		if err == nil {
 			doc = string(data)

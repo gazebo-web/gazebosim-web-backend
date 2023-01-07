@@ -173,7 +173,7 @@ var Routes = ign.Routes{
 	ign.Route{
 		Name:        "Docs",
 		Description: "Routes for documentation",
-		URI:         "/docs/{version}/{page}",
+		URI:         "/docs/{version}/{page}/{subpage}",
 		Headers:     ign.AuthHeadersOptional,
 		Methods: ign.Methods{
 			// swagger:route GET /libs libs listLib
