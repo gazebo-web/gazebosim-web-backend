@@ -40,6 +40,8 @@ will want to start from there.
 
 1. Create the database and a user in mysql. Replace `'newuser'` with your username and `'password'` with your new password:
 
+        mysqladmin -u root password
+
         # Xenial
         mysql -u root -p
         # Bionic requires sudo
