@@ -237,6 +237,9 @@ Github actions will automatically deploy `staging` on push. The `production`
 branch will only deploy when an authorized user approves the deployment on
 the Github Actions UI.
 
+There is no rule about how a release should be made. A person with sufficient
+access can choose between direct commits or pull requests.
+
 # Development
 
 ## Debugging inside docker container
