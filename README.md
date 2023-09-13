@@ -33,7 +33,7 @@ will want to start from there.
 
 
     ```
-    sudo apt-get install mysql-server
+    sudo apt-get install default-mysql-server
     ```
 
     The installer will ask you to create a root password for mysql.
