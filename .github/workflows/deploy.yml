@@ -33,7 +33,9 @@ jobs:
         #   run: go test -v ./...
 
       - name: Clone documentation
-        run: git clone https://github.com/gazebosim/docs
+        run: |
+          git clone https://github.com/gazebosim/docs
+          (cd docs; git log -n 1)
 
       - name: Generate deployment package
         run: zip -r deploy_package.zip . -x '*.git*'
@@ -87,7 +89,9 @@ jobs:
         #   run: go test -v ./...
 
       - name: Clone documentation
-        run: git clone https://github.com/gazebosim/docs
+        run: |
+          git clone https://github.com/gazebosim/docs
+          (cd docs; git log -n 1)
 
       - name: Generate deployment package
         run: zip -r deploy_package.zip . -x '*.git*'
