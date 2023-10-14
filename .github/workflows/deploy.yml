@@ -69,7 +69,7 @@ jobs:
     if: github.ref == 'refs/heads/production'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: production
+    environment: test-prod-nuclearsandwich
     steps:
       - name: Get current date
         run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
