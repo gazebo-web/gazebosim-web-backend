@@ -33,7 +33,7 @@ will want to start from there.
 
 
     ```
-    sudo apt-get install mysql-server
+    sudo apt-get install default-mysql-server
     ```
 
     The installer will ask you to create a root password for mysql.
@@ -226,6 +226,19 @@ Note you can create this bash script:
 curl -L https://git.io/vp6lP | sh -s -- -b $GOPATH/bin
 $GOPATH/bin/gometalinter $(go list github.com/gazebo-web/gazebosim-web-backend/...)
 ```
+
+# Deployment
+
+The `staging` branch in this repository is used to deploy this website to
+https://staging-api.gazebosim.org. The `production` branch in this repository is
+used to deploy this website to `https://api.gazebosim.org`.
+
+Github actions will automatically deploy `staging` on push. The `production`
+branch will only deploy when an authorized user approves the deployment on
+the Github Actions UI.
+
+There is no rule about how a release should be made. A person with sufficient
+access can choose between direct commits or pull requests.
 
 # Development
 
