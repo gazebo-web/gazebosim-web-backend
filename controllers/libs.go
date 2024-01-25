@@ -45,9 +45,7 @@ func (p byVersion) Less(i, j int) bool {
 // LibsList returns the list of models from a team/user. The returned value
 // will be of type "fuel.Models"
 // You can request this method with the following curl request:
-//
 //	curl -k -X GET --url https://localhost:4430/1.0/models
-//
 // or  curl -k -X GET --url https://localhost:4430/1.0/models.proto
 // or  curl -k -X GET --url https://localhost:4430/1.0/models.json
 // or  curl -k -X GET --url https://localhost:4430/1.0/{owner}/models with all the

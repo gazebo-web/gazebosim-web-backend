@@ -58,10 +58,10 @@ type appConfig struct {
 	HTTPport          string `env:"GZ_WEBSERVER_HTTP_PORT" envDefault:":8000"`
 }
 
-// ///////////////////////////////////////////////
-// / Initialize this package
-// /
-// / See readme for environment variables.
+/////////////////////////////////////////////////
+/// Initialize this package
+///
+/// See readme for environment variables.
 func init() {
 
 	// Using ENV approach to allow multiple layers of configuration.
@@ -140,7 +140,7 @@ func init() {
 	DBAddDefaults()
 }
 
-// ///////////////////////////////////////////////
+/////////////////////////////////////////////////
 // Run the router and server
 func main() {
 	globals.Server.Run()
