@@ -212,7 +212,7 @@ var Routes = ign.Routes{
 		URI:         "/docs/{version}/{page}/{subpage}",
 		Headers:     ign.AuthHeadersOptional,
 		Methods: ign.Methods{
-			// swagger:route GET /docs/{version}/{page}/{subpage} docs getDoc
+			// swagger:route GET /docs/{version}/{page}/{subpage} docs getDocSubpage
 			//
 			// Get a subpage of documentation
 			//
@@ -222,7 +222,7 @@ var Routes = ign.Routes{
 			//   Schemes: https
 			//
 			//   Responses:
-			//     200: Docs
+			//     200: DocSubpage
 			ign.Method{
 				Type:        "GET",
 				Description: "Get documentation",
