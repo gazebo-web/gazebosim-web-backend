@@ -176,9 +176,9 @@ var Routes = ign.Routes{
 		URI:         "/docs/{version}/{page}",
 		Headers:     ign.AuthHeadersOptional,
 		Methods: ign.Methods{
-			// swagger:route GET /libs libs listLib
+			// swagger:route GET /docs/{version}/{page} docs getDoc
 			//
-			// Get a list of libraries
+			// Get a page of documentation
 			//
 			//   Produces:
 			//   - application/json
@@ -186,7 +186,43 @@ var Routes = ign.Routes{
 			//   Schemes: https
 			//
 			//   Responses:
-			//     200: Libraries
+			//     200: Docs
+			ign.Method{
+				Type:        "GET",
+				Description: "Get documentation",
+				Handlers: ign.FormatHandlers{
+					ign.FormatHandler{
+						Extension: ".json",
+						Handler:   ign.JSONListResult("", controllers.DocsPage),
+					},
+
+					ign.FormatHandler{
+						Extension: "",
+						Handler:   ign.JSONListResult("", controllers.DocsPage),
+					},
+				},
+			},
+		},
+		SecureMethods: ign.SecureMethods{},
+	},
+	// Route for documentation
+	ign.Route{
+		Name:        "Docs",
+		Description: "Routes for documentation",
+		URI:         "/docs/{version}/{page}/{subpage}",
+		Headers:     ign.AuthHeadersOptional,
+		Methods: ign.Methods{
+			// swagger:route GET /docs/{version}/{page}/{subpage} docs getDocSubpage
+			//
+			// Get a subpage of documentation
+			//
+			//   Produces:
+			//   - application/json
+			//
+			//   Schemes: https
+			//
+			//   Responses:
+			//     200: DocSubpage
 			ign.Method{
 				Type:        "GET",
 				Description: "Get documentation",
